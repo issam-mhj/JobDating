@@ -1,0 +1,7 @@
+.env
+config.php
+/vendor/
+composer.lock
+/logs/
+*.log
+.vscode/
