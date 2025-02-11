@@ -12,7 +12,7 @@ class Database
         try {
             $capsule = new Capsule;
             $capsule->addConnection([
-                'driver' => $_ENV['DB_DRIVER'] ?? 'mysql',
+                'driver' => $_ENV['DB_DRIVER'],
                 'host' => $_ENV['DB_HOST'],
                 'database' => $_ENV['DB_NAME'],
                 'username' => $_ENV['DB_USER'],
