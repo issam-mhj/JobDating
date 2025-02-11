@@ -7,4 +7,6 @@ $router->add('GET', '/signup', 'Front\AuthController@signup');
 $router->add('POST', '/signup', 'Front\AuthController@signup');
 $router->add('GET', '/logout', 'Front\AuthController@logout');
 $router->add('GET', '/Admin', 'Back\AdminController@index');
+$router->add('GET', '/Admin/Announcements', 'Back\AdminController@announce');
+$router->add('GET', '/Admin/Companies', 'Back\AdminController@companies');
 $router->add('GET', '/Home', 'Front\UserController@index');
