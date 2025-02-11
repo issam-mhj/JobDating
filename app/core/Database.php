@@ -21,6 +21,17 @@ class Database
 
             $capsule->setAsGlobal();
             $capsule->bootEloquent();
+
+            // Create migrations table if not exists
+            if (!Capsule::schema()->hasTable('migrations')) {
+                Capsule::schema()->create('migrations', function ($table) {
+                    $table->increments('id');
+                    $table->string('migration');
+                    $table->integer('batch');
+                    $table->timestamps();
+
+                });
+            }
         } catch (\Exception $e) {
            
             Logger::setLogLevel('error');

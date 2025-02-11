@@ -7,13 +7,15 @@ use App\Core\View;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-try {
-    require __DIR__ . '/../vendor/autoload.php';
 
+try{
+    
+    require __DIR__ . '/../vendor/autoload.php';
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
     $dotenv->load();
-
     Database::init();
+
+        
     Session::start();
 
     $loader = new FilesystemLoader(__DIR__ . '/../app/views');
@@ -24,7 +26,10 @@ try {
     $router = new Router();
     require __DIR__ . '/../config/routes.php';
     $router->dispatch();
-} catch (\Exception $e) {
+
+        
+
+}catch(\Exception $e){
     echo 'Error: ' . $e->getMessage();
     exit;
 }
