@@ -12,7 +12,7 @@
         <!-- Sidebar -->
         <div class="w-64 bg-gray-800 text-white p-4">
             <div class="flex items-center justify-center mb-8">
-                <img src="/api/placeholder/40/40" alt="YouCode Logo" class="h-8 w-8 mr-2">
+                <img src="https://imgs.search.brave.com/R5Wwep8H98CL2PUKxv3W-4j2okGfFEAlK1wZ6Swz7FE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hdGQt/YmxvZ2VzLnMzLnVz/LWVhc3QtMi5hbWF6/b25hd3MuY29tL3dw/LWNvbnRlbnQvdXBs/b2Fkcy8yMDIyLzA0/LzE2MTQyODM2L2Nv/b2wtcHJvZmlsZS1w/aWN0dXJlcy1mb3It/eW91dHViZS0xNy53/ZWJw" alt="YouCode Logo" class="h-8 w-8 mr-2 rounded-xl">
                 <div class="text-xl font-bold">YouCode Admin</div>
             </div>
             <nav>
@@ -50,9 +50,9 @@
                             <img src="/api/placeholder/32/32" alt="Admin" class="h-8 w-8 rounded-full">
                             <span class="ml-2 text-gray-700">Admin User</span>
                         </div>
-                        <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+                        <a href="/logout" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
                             <i class="fas fa-sign-out-alt mr-2"></i>Déconnexion
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -82,34 +82,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-white rounded-xl shadow-sm p-6">
-                        <div class="flex items-center">
-                            <div class="bg-yellow-100 p-3 rounded-lg">
-                                <i class="fas fa-clock text-yellow-600 text-xl"></i>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-gray-500 text-sm">Annonces Actives</h3>
-                                <div class="text-2xl font-bold">8</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-sm p-6">
-                        <div class="flex items-center">
-                            <div class="bg-purple-100 p-3 rounded-lg">
-                                <i class="fas fa-users text-purple-600 text-xl"></i>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-gray-500 text-sm">Candidats</h3>
-                                <div class="text-2xl font-bold">156</div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
 
                 <!-- Monthly Stats -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                     <div class="bg-white rounded-xl shadow-sm p-6">
-                        <h2 class="text-xl font-bold mb-4">Statistiques Mensuelles</h2>
+                        <h2 class="text-xl font-bold mb-4">Statistiques</h2>
                         <div class="space-y-4">
                             <div class="flex justify-between items-center">
                                 <span class="text-gray-600">Nouvelles Annonces</span>
@@ -118,10 +97,6 @@
                             <div class="flex justify-between items-center">
                                 <span class="text-gray-600">Nouvelles Entreprises</span>
                                 <span class="text-green-600">+5</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Taux de Placement</span>
-                                <span class="text-blue-600">78%</span>
                             </div>
                         </div>
                     </div>
@@ -140,40 +115,6 @@
                             <div class="flex justify-between items-center">
                                 <span class="text-gray-600">WebTech</span>
                                 <span class="text-blue-600">4 annonces</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recent Activity -->
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <h2 class="text-xl font-bold mb-4">Activités Récentes</h2>
-                    <div class="space-y-4">
-                        <div class="flex items-center text-sm">
-                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-plus text-blue-600"></i>
-                            </div>
-                            <div class="ml-3">
-                                <p class="text-gray-800">Nouvelle annonce ajoutée par TechCorp</p>
-                                <p class="text-gray-500">Il y a 2 heures</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center text-sm">
-                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-building text-green-600"></i>
-                            </div>
-                            <div class="ml-3">
-                                <p class="text-gray-800">Nouvelle entreprise inscrite: WebTech</p>
-                                <p class="text-gray-500">Il y a 5 heures</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center text-sm">
-                            <div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-edit text-yellow-600"></i>
-                            </div>
-                            <div class="ml-3">
-                                <p class="text-gray-800">Mise à jour de l'annonce DataSolutions</p>
-                                <p class="text-gray-500">Il y a 8 heures</p>
                             </div>
                         </div>
                     </div>
