@@ -1,11 +1,14 @@
 <?php
+
 namespace App\Core;
 
 use App\Models\User;
 use App\Core\Security;
 
-class Auth {
-    public static function login($email, $password) {
+class Auth
+{
+    public static function login($email, $password)
+    {
 
         $user = User::where('email', $email)->first();
         if ($user && Security::verifyPassword($password, $user->password)) {
@@ -17,22 +20,25 @@ class Auth {
         return false;
     }
 
-    public static function logout() {
+    public static function logout()
+    {
         Session::destroy();
         Session::delete('user_id');
         Session::delete('role');
     }
 
-    public static function isAuthenticated() {
+    public static function isAuthenticated()
+    {
         Session::isset('user_id');
     }
 
-    public static function getUser() {
+    public static function getUser()
+    {
         return self::isAuthenticated() ? User::find(Session::get('user_id')) : null;
     }
 
-    public static function hasRole($role) {
+    public static function hasRole($role)
+    {
         return Session::isset('role') && $_SESSION['role'] === $role;
     }
-
 }
