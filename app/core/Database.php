@@ -29,13 +29,12 @@ class Database
                     $table->string('migration');
                     $table->integer('batch');
                     $table->timestamps();
-
                 });
             }
         } catch (\Exception $e) {
-           
+
             Logger::setLogLevel('error');
-            Logger::error($e->getMessage()); 
+            Logger::error($e->getMessage());
             throw new \Exception('Database connection failed: ' . $e->getMessage());
         }
     }

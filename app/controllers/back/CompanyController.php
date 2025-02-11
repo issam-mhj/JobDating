@@ -20,12 +20,13 @@ class CompanyController extends Controller
     public function store($request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
+            'company_name' => 'required|string|max:255',
+            'details' => 'required|string',
+
         ]);
         Company::create([
-            'name' => $request->name,
-            'description' => $request->description,
+            'company_name' => $request->name,
+            'details' => $request->description,
         ]);
 
         return view::render('/dashboard');
