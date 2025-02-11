@@ -12,7 +12,7 @@ class Database
         try {
             $capsule = new Capsule;
             $capsule->addConnection([
-                'driver' => $_ENV['DB_DRIVER'] ?? 'mysql',
+                'driver' => $_ENV['DB_DRIVER'] ?? 'postgres',
                 'host' => $_ENV['DB_HOST'],
                 'database' => $_ENV['DB_NAME'],
                 'username' => $_ENV['DB_USER'],
@@ -29,13 +29,12 @@ class Database
                     $table->string('migration');
                     $table->integer('batch');
                     $table->timestamps();
-
                 });
             }
         } catch (\Exception $e) {
-           
+
             Logger::setLogLevel('error');
-            Logger::error($e->getMessage()); 
+            Logger::error($e->getMessage());
             throw new \Exception('Database connection failed: ' . $e->getMessage());
         }
     }
