@@ -1,119 +1,182 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>YouCode Admin - Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="bg-gray-100">
     <div class="flex min-h-screen">
         <!-- Sidebar -->
-        <div class="w-64 bg-indigo-800 text-white p-4">
-            <h1 class="text-2xl font-bold mb-10">Admin Panel</h1>
+        <div class="w-64 bg-gray-800 text-white p-4">
+            <div class="flex items-center justify-center mb-8">
+                <img src="/api/placeholder/40/40" alt="YouCode Logo" class="h-8 w-8 mr-2">
+                <div class="text-xl font-bold">YouCode Admin</div>
+            </div>
             <nav>
                 <ul class="space-y-2">
-                    <li class="hover:bg-indigo-700 rounded p-2 cursor-pointer">
-                        <i class="fas fa-tachometer-alt mr-2"></i>Dashboard
+                    <li>
+                        <a href="/Admin" class="flex items-center p-3 bg-blue-600 rounded-lg">
+                            <i class="fas fa-chart-line w-6"></i>
+                            <span>Statistiques</span>
+                        </a>
                     </li>
-                    <li class="hover:bg-indigo-700 rounded p-2 cursor-pointer">
-                        <i class="fas fa-users mr-2"></i>Users
+                    <li>
+                        <a href="/Admin/Announcements" class="flex items-center p-3 hover:bg-gray-700 rounded-lg">
+                            <i class="fas fa-bullhorn w-6"></i>
+                            <span>Annonces</span>
+                        </a>
                     </li>
-                    <li class="hover:bg-indigo-700 rounded p-2 cursor-pointer">
-                        <i class="fas fa-chart-pie mr-2"></i>Analytics
-                    </li>
-                    <li class="hover:bg-indigo-700 rounded p-2 cursor-pointer">
-                        <i class="fas fa-cogs mr-2"></i>Settings
-                    </li>
-                    <li class="hover:bg-indigo-700 rounded p-2 cursor-pointer">
-                        <a href="/logout" class="logout-link">
-                            <i class="fas fa-sign-out-alt"></i>
-                            Logout
+                    <li>
+                        <a href="/Admin/Companies" class="flex items-center p-3 hover:bg-gray-700 rounded-lg">
+                            <i class="fas fa-building w-6"></i>
+                            <span>Entreprises</span>
                         </a>
                     </li>
                 </ul>
             </nav>
         </div>
-        
+
         <!-- Main Content -->
-        <div class="flex-1 p-10">
-            <div class="grid grid-cols-4 gap-6 mb-8">
-                <!-- Dashboard Cards -->
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <h3 class="text-lg font-semibold text-gray-700">Total Users</h3>
-                            <p class="text-3xl font-bold text-blue-600">24,503</p>
+        <div class="flex-1">
+            <!-- Top Navigation -->
+            <div class="bg-white shadow-sm">
+                <div class="flex justify-between items-center px-8 py-4">
+                    <h1 class="text-2xl font-bold text-gray-800">Tableau de bord</h1>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center">
+                            <img src="/api/placeholder/32/32" alt="Admin" class="h-8 w-8 rounded-full">
+                            <span class="ml-2 text-gray-700">Admin User</span>
                         </div>
-                        <i class="fas fa-users text-3xl text-blue-400"></i>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <h3 class="text-lg font-semibold text-gray-700">Revenue</h3>
-                            <p class="text-3xl font-bold text-green-600">$452,305</p>
-                        </div>
-                        <i class="fas fa-dollar-sign text-3xl text-green-400"></i>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <h3 class="text-lg font-semibold text-gray-700">Orders</h3>
-                            <p class="text-3xl font-bold text-purple-600">3,245</p>
-                        </div>
-                        <i class="fas fa-shopping-cart text-3xl text-purple-400"></i>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <h3 class="text-lg font-semibold text-gray-700">Tickets</h3>
-                            <p class="text-3xl font-bold text-red-600">126</p>
-                        </div>
-                        <i class="fas fa-life-ring text-3xl text-red-400"></i>
+                        <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+                            <i class="fas fa-sign-out-alt mr-2"></i>Déconnexion
+                        </button>
                     </div>
                 </div>
             </div>
-            
-            <!-- Charts and Tables -->
-            <div class="grid grid-cols-2 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h2 class="text-xl font-semibold mb-4">Sales Overview</h2>
-                    <div class="h-64 bg-gray-200 flex items-center justify-center">
-                        Chart Placeholder
+
+            <div class="p-8">
+                <!-- Stats Overview -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <div class="flex items-center">
+                            <div class="bg-blue-100 p-3 rounded-lg">
+                                <i class="fas fa-bullhorn text-blue-600 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-gray-500 text-sm">Total Annonces</h3>
+                                <div class="text-2xl font-bold">24</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <div class="flex items-center">
+                            <div class="bg-green-100 p-3 rounded-lg">
+                                <i class="fas fa-building text-green-600 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-gray-500 text-sm">Entreprises</h3>
+                                <div class="text-2xl font-bold">12</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <div class="flex items-center">
+                            <div class="bg-yellow-100 p-3 rounded-lg">
+                                <i class="fas fa-clock text-yellow-600 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-gray-500 text-sm">Annonces Actives</h3>
+                                <div class="text-2xl font-bold">8</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <div class="flex items-center">
+                            <div class="bg-purple-100 p-3 rounded-lg">
+                                <i class="fas fa-users text-purple-600 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-gray-500 text-sm">Candidats</h3>
+                                <div class="text-2xl font-bold">156</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h2 class="text-xl font-semibold mb-4">Recent Activity</h2>
-                    <table class="w-full text-left">
-                        <thead>
-                            <tr class="border-b">
-                                <th class="pb-2">User</th>
-                                <th class="pb-2">Action</th>
-                                <th class="pb-2">Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="border-b">
-                                <td>John Doe</td>
-                                <td>Login</td>
-                                <td>2 hours ago</td>
-                            </tr>
-                            <tr class="border-b">
-                                <td>Jane Smith</td>
-                                <td>Purchase</td>
-                                <td>4 hours ago</td>
-                            </tr>
-                            <tr>
-                                <td>Mike Johnson</td>
-                                <td>Support Ticket</td>
-                                <td>6 hours ago</td>
-                            </tr>
-                        </tbody>
-                    </table>
+
+                <!-- Monthly Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <h2 class="text-xl font-bold mb-4">Statistiques Mensuelles</h2>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Nouvelles Annonces</span>
+                                <span class="text-green-600">+12</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Nouvelles Entreprises</span>
+                                <span class="text-green-600">+5</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Taux de Placement</span>
+                                <span class="text-blue-600">78%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <h2 class="text-xl font-bold mb-4">Top Entreprises</h2>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">TechCorp</span>
+                                <span class="text-blue-600">8 annonces</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">DataSolutions</span>
+                                <span class="text-blue-600">6 annonces</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">WebTech</span>
+                                <span class="text-blue-600">4 annonces</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h2 class="text-xl font-bold mb-4">Activités Récentes</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-center text-sm">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-plus text-blue-600"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-gray-800">Nouvelle annonce ajoutée par TechCorp</p>
+                                <p class="text-gray-500">Il y a 2 heures</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-building text-green-600"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-gray-800">Nouvelle entreprise inscrite: WebTech</p>
+                                <p class="text-gray-500">Il y a 5 heures</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-edit text-yellow-600"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-gray-800">Mise à jour de l'annonce DataSolutions</p>
+                                <p class="text-gray-500">Il y a 8 heures</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

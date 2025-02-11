@@ -1,133 +1,181 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard</title>
+    <title>YouCode Job Dating</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-
-<body class="bg-gray-100 font-sans">
-    <div class="flex min-h-screen">
-        <!-- Sidebar -->
-        <div class="w-64 bg-green-800 text-white p-4">
-            <div class="flex items-center mb-10">
-                <img src="https://imgs.search.brave.com/R5Wwep8H98CL2PUKxv3W-4j2okGfFEAlK1wZ6Swz7FE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hdGQt/YmxvZ2VzLnMzLnVz/LWVhc3QtMi5hbWF6/b25hd3MuY29tL3dw/LWNvbnRlbnQvdXBs/b2Fkcy8yMDIyLzA0/LzE2MTQyODM2L2Nv/b2wtcHJvZmlsZS1w/aWN0dXJlcy1mb3It/eW91dHViZS0xNy53/ZWJw" alt="Profile" class="w-12 h-12 rounded-full mr-4">
-                <div>
-                    <h2 class="text-lg font-semibold">{{ user.username }}</h2>
-                    <p class="text-sm text-green-300">Premium User</p>
+<body class="bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen">
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <img src="/api/placeholder/40/40" alt="YouCode Logo" class="h-10 w-10 rounded-lg"/>
+                    <span class="ml-3 text-xl font-semibold text-gray-800">YouCode Job Dating</span>
+                </div>
+                <div class="flex space-x-4">
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                        Se connecter
+                    </button>
                 </div>
             </div>
-            <nav>
-                <ul class="space-y-2">
-                    <li class="hover:bg-green-700 rounded p-2 cursor-pointer">
-                        <i class="fas fa-tachometer-alt mr-2"></i>Overview
-                    </li>
-                    <li class="hover:bg-green-700 rounded p-2 cursor-pointer">
-                        <i class="fas fa-history mr-2"></i>History
-                    </li>
-                    <li class="hover:bg-green-700 rounded p-2 cursor-pointer">
-                        <i class="fas fa-wallet mr-2"></i>Billing
-                    </li>
-                    <li class="hover:bg-green-700 rounded p-2 cursor-pointer">
-                        <i class="fas fa-cog mr-2"></i>Settings
-                    </li>
-                    <li class="hover:bg-green-700 rounded p-2 cursor-pointer">
-                        <a href="/logout" class="logout-link">
-                            <i class="fas fa-sign-out-alt"></i>
-                            Logout
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+        </nav>
+    </header>
 
-        <!-- Main Content -->
-        <div class="flex-1 p-10">
-            <div class="grid grid-cols-3 gap-6 mb-8">
-                <!-- User Cards -->
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <h3 class="text-lg font-semibold text-gray-700">Total Spent</h3>
-                            <p class="text-3xl font-bold text-blue-600">$2,345</p>
-                        </div>
-                        <i class="fas fa-dollar-sign text-3xl text-blue-400"></i>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <h3 class="text-lg font-semibold text-gray-700">Active Services</h3>
-                            <p class="text-3xl font-bold text-green-600">4</p>
-                        </div>
-                        <i class="fas fa-layer-group text-3xl text-green-400"></i>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <h3 class="text-lg font-semibold text-gray-700">Support Tickets</h3>
-                            <p class="text-3xl font-bold text-red-600">2</p>
-                        </div>
-                        <i class="fas fa-life-ring text-3xl text-red-400"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!-- User Content -->
-            <div class="grid grid-cols-2 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h2 class="text-xl font-semibold mb-4">Recent Purchases</h2>
-                    <table class="w-full text-left">
-                        <thead>
-                            <tr class="border-b">
-                                <th class="pb-2">Service</th>
-                                <th class="pb-2">Date</th>
-                                <th class="pb-2">Cost</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="border-b">
-                                <td>Pro Hosting</td>
-                                <td>Jan 15, 2024</td>
-                                <td>$99</td>
-                            </tr>
-                            <tr class="border-b">
-                                <td>Domain Registration</td>
-                                <td>Dec 22, 2023</td>
-                                <td>$15</td>
-                            </tr>
-                            <tr>
-                                <td>SSL Certificate</td>
-                                <td>Nov 5, 2023</td>
-                                <td>$50</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h2 class="text-xl font-semibold mb-4">Account Activity</h2>
-                    <div class="space-y-4">
-                        <div class="flex items-center">
-                            <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
-                            <span>Service renewal completed</span>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
-                            <span>Upgrade to premium plan</span>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-3 h-3 bg-yellow-500 rounded-full mr-3"></div>
-                            <span>Pending support ticket</span>
-                        </div>
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold mb-4">Trouvez votre opportunité de carrière</h1>
+                <p class="text-xl text-blue-100 mb-8">Participez aux sessions de Job Dating et rencontrez les meilleures entreprises</p>
+                <!-- Search Bar -->
+                <div class="max-w-2xl mx-auto">
+                    <div class="relative rounded-lg shadow-lg">
+                        <input type="text" placeholder="Rechercher une annonce..." 
+                               class="w-full px-6 py-4 rounded-lg text-gray-900 focus:outline-none"/>
+                        <button class="absolute right-3 top-3 bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700">
+                            <i class="fas fa-search"></i>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</body>
 
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Stats Section -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="bg-white rounded-xl shadow-sm p-6 text-center">
+                <div class="text-blue-600 text-3xl mb-2">
+                    <i class="fas fa-building"></i>
+                </div>
+                <div class="text-2xl font-bold text-gray-800">15+</div>
+                <div class="text-gray-600">Entreprises Partenaires</div>
+            </div>
+            <div class="bg-white rounded-xl shadow-sm p-6 text-center">
+                <div class="text-blue-600 text-3xl mb-2">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <div class="text-2xl font-bold text-gray-800">50+</div>
+                <div class="text-gray-600">Offres Disponibles</div>
+            </div>
+            <div class="bg-white rounded-xl shadow-sm p-6 text-center">
+                <div class="text-blue-600 text-3xl mb-2">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="text-2xl font-bold text-gray-800">200+</div>
+                <div class="text-gray-600">Apprenants Placés</div>
+            </div>
+        </div>
+
+        <!-- Announcements Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Announcement Card 1 -->
+            <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="bg-blue-600 h-12 w-12 rounded-lg flex items-center justify-center text-white text-xl">
+                                TC
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="font-semibold text-gray-800">TechCorp</h3>
+                                <p class="text-sm text-gray-500">Développeur Full Stack</p>
+                            </div>
+                        </div>
+                        <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">Nouveau</span>
+                    </div>
+                    <div class="space-y-3 mb-4">
+                        <div class="flex items-center text-gray-600">
+                            <i class="fas fa-map-marker-alt w-5"></i>
+                            <span class="ml-2 text-sm">Youssoufia, Maroc</span>
+                        </div>
+                        <div class="flex items-center text-gray-600">
+                            <i class="fas fa-calendar w-5"></i>
+                            <span class="ml-2 text-sm">Job Dating: 25 Février 2024</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Nous recherchons un développeur passionné pour rejoindre notre équipe dynamique...
+                    </p>
+                    
+                </div>
+            </div>
+
+            <!-- Announcement Card 2 -->
+            <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <div class="bg-purple-600 h-12 w-12 rounded-lg flex items-center justify-center text-white text-xl">
+                                DS
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="font-semibold text-gray-800">DataSolutions</h3>
+                                <p class="text-sm text-gray-500">Développeur Frontend</p>
+                            </div>
+                        </div>
+                        <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">1 semaine</span>
+                    </div>
+                    <div class="space-y-3 mb-4">
+                        <div class="flex items-center text-gray-600">
+                            <i class="fas fa-map-marker-alt w-5"></i>
+                            <span class="ml-2 text-sm">Safi, Maroc</span>
+                        </div>
+                        <div class="flex items-center text-gray-600">
+                            <i class="fas fa-calendar w-5"></i>
+                            <span class="ml-2 text-sm">Job Dating: 28 Février 2024</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Opportunité pour un développeur Frontend spécialisé en React...
+                    </p>
+                   
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">À propos</h3>
+                    <p class="text-gray-400 text-sm">
+                        YouCode organise des événements de Job Dating pour favoriser la rencontre entre les apprenants et les employeurs potentiels.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
+                    <div class="space-y-2 text-gray-400 text-sm">
+                        <p><i class="fas fa-envelope mr-2"></i> contact@youcode.ma</p>
+                        <p><i class="fas fa-phone mr-2"></i> +212 5XX-XXXXXX</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Suivez-nous</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-linkedin text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-twitter text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-facebook text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400 text-sm">
+                © 2024 YouCode. Tous droits réservés.
+            </div>
+        </div>
+    </footer>
+</body>
 </html>

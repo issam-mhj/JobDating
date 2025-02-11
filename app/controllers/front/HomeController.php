@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $users = User::all();
-        View::render('home', ['users' => $users]);
+        // $users = User::all();
+        View::render('home');
     }
 }
