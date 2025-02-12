@@ -13,11 +13,12 @@ use App\Core\Logger;
 
 class CompanyController extends Controller
 {
+
     public function create()
     {
         return view::render('add_entreprise');
     }
-
+    
     public function store()
     {
         $name = $_POST["name"];

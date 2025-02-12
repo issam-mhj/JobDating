@@ -1,24 +1,18 @@
 <?php
 namespace App\Controllers\Back;
 use App\Core\Controller;
-use App\Core\Session;
 use App\Core\View;
-use App\Core\Logger;
-use App\Models\Announcement;
 use App\Models\Announncements;
 
 class AnnouncementsController extends Controller {
 
    
     public function index() {
-        // $this->create();
 
-   
-        $announncements = Announncements::all();
-        $companies = (new CompanyController())->getAll();
+        $announncements = Announncements::with('company')->get();
+        // $companies = (new CompanyController())->getAll();
 
-        return view::render('announcements', ['announncements' => $announncements, 'companies' => $companies]);
-
+        return view::render('announcements', ['announncements' => $announncements]);
     }
 
  
