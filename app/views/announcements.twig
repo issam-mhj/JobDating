@@ -1,3 +1,5 @@
+{# <pre>{{ dump(announncements) }}</pre> #}
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -81,11 +83,15 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                    {% for announncement in announncements %}
                                 <tr class="border-b">
+                                
+                                
                                     <td class="p-4">
-                                        <div class="font-semibold">Développeur Full Stack</div>
-                                        <div class="text-sm text-gray-500">Job Dating: 25 Fév 2024</div>
+                                        <div class="font-semibold">{{ announncement.title }}</div>
+                                        <div class="text-sm text-gray-500">{{ announncement.created_at}}</div>
                                     </td>
+                                  
                                     <td class="p-4">
                                         <div class="flex items-center">
                                             <img src="/api/placeholder/32/32" alt="TechCorp" class="h-8 w-8 rounded-lg mr-2">
@@ -108,6 +114,7 @@
                                         </button>
                                     </td>
                                 </tr>
+                                  {% endfor %}
                                                 <!-- More announcement rows -->
                                 <tr class="border-b">
                                     <td class="p-4">
@@ -172,9 +179,86 @@
     </div>
 
     <!-- Add Announcement Modal (to be implemented) -->
-    <div id="addAnnouncementModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-        <!-- Modal content would go here -->
+    <div id="addAnnouncementModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
+        <!-- Modal Header -->
+        <div class="flex justify-between items-center p-6 border-b">
+            <h2 class="text-xl font-bold text-gray-800">Nouvelle Annonce</h2>
+            <button onclick="document.getElementById('addAnnouncementModal').classList.add('hidden')" 
+                    class="text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Modal Body -->
+        <form class="p-6 space-y-6">
+            <div class="space-y-4">
+                <!-- Title -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">
+                        Titre du poste
+                    </label>
+                    <input type="text" name="title" required
+                           class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- Description -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">
+                        Description
+                    </label>
+                    <textarea name="description" rows="4" required
+                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                </div>
+
+                <!-- Date -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">
+                        Date du Job Dating
+                    </label>
+                    <input type="datetime-local" name="date" required
+                           class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- Location -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">
+                        Lieu
+                    </label>
+                    <input type="text" name="location" required
+                           class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- Company -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">
+                        Entreprise
+                    </label>
+                    <select name="company_id" required
+                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">Sélectionner une entreprise</option>
+                        {% for company in companies %}            
+                        <option value="{{ company.id }}">{{ company.company_name }}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="flex justify-end space-x-4 pt-4 border-t">
+                <button type="button" 
+                        onclick="document.getElementById('addAnnouncementModal').classList.add('hidden')"
+                        class="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200">
+                    Annuler
+                </button>
+                <button type="submit"
+                        class="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700">
+                    Créer l'annonce
+                </button>
+            </div>
+        </form>
     </div>
+</div>
 
 </body>
 </html>

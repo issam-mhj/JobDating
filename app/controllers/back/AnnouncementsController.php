@@ -11,10 +11,13 @@ class AnnouncementsController extends Controller {
 
    
     public function index() {
+        // $this->create();
 
    
         $announncements = Announncements::all();
-        return view::render('announcements', ['announncements' => $announncements]);
+        $companies = (new CompanyController())->getAll();
+
+        return view::render('announcements', ['announncements' => $announncements, 'companies' => $companies]);
 
     }
 

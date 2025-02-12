@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Back;
 
 use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Core\Controller;
 use App\Core\View;
+use Carbon\Carbon;
 use App\Core\Session;
 use App\Core\Logger;
 
@@ -17,18 +18,22 @@ class CompanyController extends Controller
         return view::render('add_entreprise');
     }
 
-    public function store($request)
+    public function store()
     {
-        $request->validate([
-            'company_name' => 'required|string|max:255',
-            'details' => 'required|string',
-
-        ]);
+        $name = $_POST["name"];
+        $details = $_POST["details"];
         Company::create([
-            'company_name' => $request->name,
-            'details' => $request->description,
+            'company_name' => $name,
+            'details' => $details,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ]);
 
-        return view::render('/dashboard');
+        return view::render('/AdminDashboard');
+    }
+    public function getAll(){
+        
+        $companies = Company::all();
+        return $companies;
     }
 }

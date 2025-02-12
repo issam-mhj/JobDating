@@ -1,5 +1,8 @@
 <?php
+
 namespace App\Controllers\Front;
+
+use App\Controllers\Back\CompanyController;
 use App\Core\Controller;
 use App\Core\Logger;
 use App\Core\Session;
@@ -10,11 +13,12 @@ class UserController extends Controller
 {
     public function index()
     {
+        $usersNumber = count(User::get());
+        $companies = (new CompanyController())->getAll();
+
         try {
             if (Session::isset('user_id') && $_SESSION['role'] == 'user') {
-
-                $user = User::find(Session::get('user_id'));
-                View::render('UserDashboard', ['user' => $user]);
+                View::render('UserDashboard', ['usersNumber' => $usersNumber, 'companies' => $companies]);
             } else {
                 $this->redirect('/login');
             }
