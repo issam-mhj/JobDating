@@ -4,22 +4,25 @@ use App\Core\Controller;
 use App\Core\View;
 use App\Models\Announncements;
 use App\Core\Validator;
+use companies;
 
 class AnnouncementsController extends Controller {
 
    
     public function index() {
+        
 
         $announncements = Announncements::with('company')->get();
-        // $companies = (new CompanyController())->getAll();
+        $companies = (new CompanyController())->getAll();
 
-        return view::render('announcements', ['announncements' => $announncements]);
+        return view::render('announcements', ['announncements' => $announncements, 'companies' => $companies]);
     }
 
  
     public function create() {
 
         if ($this->isPost()){
+            // dd($_POST);
          
             $data = Validator::sanitize($_POST); 
         
