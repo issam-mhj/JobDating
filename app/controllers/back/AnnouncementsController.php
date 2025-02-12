@@ -19,6 +19,19 @@ class AnnouncementsController extends Controller {
         return view::render('announcements', ['announncements' => $announncements, 'companies' => $companies, 'currentUrl' => $currentUrl]);
     }
 
+    public function deletedAnnounces() {
+        $currentUrl = $_SERVER['REQUEST_URI'];
+        $announncements = Announncements::onlyTrashed()->get();
+        $companies = (new CompanyController())->getAll();
+        return view::render('delete_announcements', ['announncements' => $announncements, 'companies' => $companies, 'currentUrl' => $currentUrl]);
+    }
+
+    public function hardDeleteAnnounce() {
+        $id = Validator::sanitize($_GET['id']);
+        Announncements::withTrashed()->find($id)->forceDelete();
+        $this->redirect('/Admin/Announcements/deleted?success=Announcement deleted permanently');
+    }
+
  
     public function create() {
 
