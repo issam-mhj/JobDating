@@ -13,13 +13,15 @@
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <div class="flex justify-between items-center">
                 <div class="flex items-center">
-                    <img src="/api/placeholder/40/40" alt="YouCode Logo" class="h-10 w-10 rounded-lg"/>
+                    <img src="https://www.youcode.ma/images/logos/youcode.png" 
+                        alt="YouCode Logo" 
+                        class="h-10 w-auto filter invert"/>
                     <span class="ml-3 text-xl font-semibold text-gray-800">YouCode Job Dating</span>
                 </div>
                 <div class="flex space-x-4">
-                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                        Se connecter
-                    </button>
+                    <a href="/logout" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                        Log out
+                    </a>
                 </div>
             </div>
         </nav>
@@ -53,21 +55,21 @@
                 <div class="text-blue-600 text-3xl mb-2">
                     <i class="fas fa-building"></i>
                 </div>
-                <div class="text-2xl font-bold text-gray-800">15+</div>
+                <div class="text-2xl font-bold text-gray-800">{{ totalCompanies }} +</div>
                 <div class="text-gray-600">Entreprises Partenaires</div>
             </div>
             <div class="bg-white rounded-xl shadow-sm p-6 text-center">
                 <div class="text-blue-600 text-3xl mb-2">
                     <i class="fas fa-briefcase"></i>
                 </div>
-                <div class="text-2xl font-bold text-gray-800">50+</div>
+                <div class="text-2xl font-bold text-gray-800">{{ totalAnnounces }}+</div>
                 <div class="text-gray-600">Offres Disponibles</div>
             </div>
             <div class="bg-white rounded-xl shadow-sm p-6 text-center">
                 <div class="text-blue-600 text-3xl mb-2">
                     <i class="fas fa-users"></i>
                 </div>
-                <div class="text-2xl font-bold text-gray-800">200+</div>
+                <div class="text-2xl font-bold text-gray-800">{{ usersNumber }}+</div>
                 <div class="text-gray-600">Apprenants Placés</div>
             </div>
         </div>
@@ -75,16 +77,17 @@
         <!-- Announcements Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Announcement Card 1 -->
+            {% for announce in announces %}
             <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
                 <div class="p-6">
                     <div class="flex items-center justify-between mb-4">
                         <div class="flex items-center">
                             <div class="bg-blue-600 h-12 w-12 rounded-lg flex items-center justify-center text-white text-xl">
-                                TC
+                                {{ companyShortName }}
                             </div>
                             <div class="ml-3">
-                                <h3 class="font-semibold text-gray-800">TechCorp</h3>
-                                <p class="text-sm text-gray-500">Développeur Full Stack</p>
+                                <h3 class="font-semibold text-gray-800">{{ companyName }}</h3>
+                                <p class="text-sm text-gray-500">{{ JobNeeds }}</p>
                             </div>
                         </div>
                         <span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">Nouveau</span>
@@ -92,52 +95,21 @@
                     <div class="space-y-3 mb-4">
                         <div class="flex items-center text-gray-600">
                             <i class="fas fa-map-marker-alt w-5"></i>
-                            <span class="ml-2 text-sm">Youssoufia, Maroc</span>
+                            <span class="ml-2 text-sm">{{ location }}</span>
                         </div>
                         <div class="flex items-center text-gray-600">
                             <i class="fas fa-calendar w-5"></i>
-                            <span class="ml-2 text-sm">Job Dating: 25 Février 2024</span>
+                            <span class="ml-2 text-sm">Job Dating: {{ Date }} </span>
                         </div>
                     </div>
                     <p class="text-gray-600 text-sm mb-4">
-                        Nous recherchons un développeur passionné pour rejoindre notre équipe dynamique...
-                    </p>
+{{ description }}
+</p>
                     
                 </div>
             </div>
-
-            <!-- Announcement Card 2 -->
-            <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-                <div class="p-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="flex items-center">
-                            <div class="bg-purple-600 h-12 w-12 rounded-lg flex items-center justify-center text-white text-xl">
-                                DS
-                            </div>
-                            <div class="ml-3">
-                                <h3 class="font-semibold text-gray-800">DataSolutions</h3>
-                                <p class="text-sm text-gray-500">Développeur Frontend</p>
-                            </div>
-                        </div>
-                        <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full">1 semaine</span>
-                    </div>
-                    <div class="space-y-3 mb-4">
-                        <div class="flex items-center text-gray-600">
-                            <i class="fas fa-map-marker-alt w-5"></i>
-                            <span class="ml-2 text-sm">Safi, Maroc</span>
-                        </div>
-                        <div class="flex items-center text-gray-600">
-                            <i class="fas fa-calendar w-5"></i>
-                            <span class="ml-2 text-sm">Job Dating: 28 Février 2024</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 text-sm mb-4">
-                        Opportunité pour un développeur Frontend spécialisé en React...
-                    </p>
-                   
-                </div>
-            </div>
-        </div>
+            {% endfor %}
+</div>
     </main>
 
     <!-- Footer -->

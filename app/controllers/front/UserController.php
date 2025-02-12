@@ -10,11 +10,13 @@ class UserController extends Controller
 {
     public function index()
     {
+        $usersNumber = count(User::get());
+        
         try {
             if (Session::isset('user_id') && $_SESSION['role'] == 'user') {
 
                 $user = User::find(Session::get('user_id'));
-                View::render('UserDashboard', ['user' => $user]);
+                View::render('UserDashboard', ['user' => $user, 'usersNumber' => $usersNumber]);
             } else {
                 $this->redirect('/login');
             }
