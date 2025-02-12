@@ -46,8 +46,10 @@ class AdminController extends Controller
     {
         try {
             if (Session::isset('user_id') && $_SESSION['role'] === 'admin') {
+                
+        $current_uri = $_SERVER['REQUEST_URI'];
                 // $user = User::find(Session::get('user_id'));
-                View::render('companies');
+                View::render('companies', ['current_uri' => $current_uri]);
             } else {
                 $this->redirect('/login');
             }

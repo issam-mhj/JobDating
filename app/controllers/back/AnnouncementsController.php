@@ -1,10 +1,7 @@
 <?php
 namespace App\Controllers\Back;
 use App\Core\Controller;
-use App\Core\Session;
 use App\Core\View;
-use App\Core\Logger;
-use App\Models\Announcement;
 use App\Models\Announncements;
 use App\Core\Validator;
 
@@ -12,12 +9,11 @@ class AnnouncementsController extends Controller {
 
    
     public function index() {
-        
-        $announncements = Announncements::all()->toArray();
-        $companies = (new CompanyController())->getAll();
 
-        return view::render('announcements', ['announncements' => $announncements, 'companies' => $companies]);
+        $announncements = Announncements::with('company')->get();
+        // $companies = (new CompanyController())->getAll();
 
+        return view::render('announcements', ['announncements' => $announncements]);
     }
 
  
