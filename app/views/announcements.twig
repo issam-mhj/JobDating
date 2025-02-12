@@ -1,92 +1,98 @@
 {% include 'partials/sidebar.php' with {'currentUrl': currentUrl} %}
 
-{# <pre>
-	{{ dump(currentUrl) }}
-</pre> #}
+
 <!-- Main Content -->
-	<div
-	class="flex-1"> <!-- Top Navigation -->
-	<div class="bg-white shadow-sm">
-		<div class="flex justify-between items-center px-8 py-4">
-			<h1 class="text-2xl font-bold text-gray-800">Gestion des Annonces</h1>
-			<div><button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700" onclick="document.getElementById('addAnnouncementModal').classList.remove('hidden')">
-				<i class="fas fa-plus mr-2"></i>Nouvelle annonce
-			</button>
-			<a href="/logout" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
-				<i class="fas fa-sign-out-alt mr-2"></i>Déconnexion
-			</a>
-			</div>
-		</div>
-	</div>
+	<div class="flex-1"> 
+        <div class="bg-white shadow-sm">
+            <div class="flex justify-between items-center px-8 py-4">
+                <h1 class="text-2xl font-bold text-gray-800">Gestion des Annonces</h1>
+                <div>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700" onclick="document.getElementById('addAnnouncementModal').classList.remove('hidden')">
+                        <i class="fas fa-plus mr-2"></i>Nouvelle annonce
+                    </button>
+                    <a href="/logout" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Déconnexion
+                    </a>
+                </div>
+            </div>
+        </div>
+	    <div class="p-8">
+            <!-- Announcements List -->
+            <div class="bg-white rounded-xl shadow-sm p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold">Liste des Annonces</h2>
 
-	<div
-		class="p-8">
-		<!-- Announcements List -->
-		<div class="bg-white rounded-xl shadow-sm p-6">
-			<div class="flex justify-between items-center mb-6">
-				<h2 class="text-xl font-bold">Liste des Annonces</h2>
-				<div class="flex space-x-2">
-					<input type="text" placeholder="Rechercher une annonce..." class="px-4 py-2 border rounded-lg">
-					<select class="px-4 py-2 border rounded-lg">
-						<option>Toutes les entreprises</option>
-						<option>TechCorp</option>
-						<option>DataSolutions</option>
-					</select>
-					<button class="bg-gray-100 px-4 py-2 rounded-lg hover:bg-gray-200">
-						<i class="fas fa-filter"></i>
-					</button>
-				</div>
-			</div>
-			<div class="overflow-x-auto">
-				<table class="w-full">
-					<thead class="bg-gray-50">
-						<tr>
-							<th class="p-4 text-left">Poste</th>
-							<th class="p-4 text-left">Entreprise</th>
-							<th class="p-4 text-left">Date</th>
-							<th class="p-4 text-left">Lieu</th>
-							<th class="p-4 text-left">Statut</th>
-							<th class="p-4 text-left">Actions</th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for announncement in announncements %}
-							<tr class="border-b">
-								<td class="p-4">
-									<div class="font-semibold">{{ announncement.post_title }}</div>
-									<div class="text-sm text-gray-500">{{ announncement.job_date}}</div>
-								</td>
+                      
 
-								<td class="p-4">
-									<div
-										class="flex items-center">
-										{# <img src="/api/placeholder/32/32" alt="TechCorp" class="h-8 w-8 rounded-lg mr-2"> #}
-										<span>{{ announncement.company.company_name }}</span>
-									</div>
-								</td>
-								<td class="p-4">{{ announncement.job_date | date("d F Y")  }}</td>
-								<td class="p-4">{{ announncement.location}}</td>
-								<td class="p-4">
-									<span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-sm">
-										Active
-									</span>
-								</td>
-								<td class="p-4">
-									<a href="/announce/edit?id={{announncement.id}}" class="text-blue-600 hover:text-blue-700 mr-3">
-										<i class="fas fa-edit"></i>
-									</a>
-									<a href="/announce/delete?id={{announncement.id}}" class="text-red-600 hover:text-red-700">
-										<i class="fas fa-trash"></i>
-									</a>
-								</td>
-							</tr>
-						{% endfor %}
-					</tbody>
-				</table>
-			</div>
-		</div>
+                    <div class="text-red-500">
+                   
+
+                    </div>
+                    
+                    <div class="flex space-x-2">
+                        <input type="text" placeholder="Rechercher une annonce..." class="px-4 py-2 border rounded-lg">
+                            <select class="px-4 py-2 border rounded-lg">
+                            <option>Toutes les entreprises</option>
+                            <option>TechCorp</option>
+                            <option>DataSolutions</option>
+                        </select>
+                        <button class="bg-gray-100 px-4 py-2 rounded-lg hover:bg-gray-200">
+                            <i class="fas fa-filter"></i>
+                        </button>
+                    </div>
+                </div>
+              
+                {% if session.message is defined %}
+                <div class="p-4 mb-2 bg-red-50 border border-red-400 rounded-lg w-80 text-red-700 text-sm">
+                    <p class="text-green-500"> {{ session.message }}</p>      
+                </div> 
+                {% endif %}
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="p-4 text-left">Poste</th>
+                                <th class="p-4 text-left">Entreprise</th>
+                                <th class="p-4 text-left">Date</th>
+                                <th class="p-4 text-left">Lieu</th>
+                                
+                                <th class="p-4 text-left">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for announncement in announncements %}
+                                <tr class="border-b">
+                                    <td class="p-4">
+                                        <div class="font-semibold">{{ announncement.post_title }}</div>
+                                        <div class="text-sm text-gray-500">{{ announncement.job_date}}</div>
+                                    </td>
+
+                                    <td class="p-4">
+                                        <div
+                                            class="flex items-center">
+                                            {# <img src="/api/placeholder/32/32" alt="TechCorp" class="h-8 w-8 rounded-lg mr-2"> #}
+                                            <span>{{ announncement.company.company_name }}</span>
+                                        </div>
+                                    </td>
+                                    <td class="p-4">{{ announncement.job_date | date("d F Y")  }}</td>
+                                    <td class="p-4">{{ announncement.location}}</td>
+                                    <td class="p-4">
+                                        <a href="/announce/edit?id={{announncement.id}}" class="text-blue-600 hover:text-blue-700 mr-3">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="/announce/delete?id={{announncement.id}}" class="text-red-600 hover:text-red-700">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 	</div>
-</div></div><!-- Add Announcement Modal (to be implemented) --><div id="addAnnouncementModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+</div></div><div id="addAnnouncementModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
 <div
 	class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
 	<!-- Modal Header -->
@@ -163,4 +169,7 @@
 			</button>
 		</div>
 	</form>
-</div></div></body></html>
+</div>
+</div>
+</body>
+</html>
