@@ -6,6 +6,7 @@ use App\Core\View;
 use App\Core\Logger;
 use App\Models\User;
 
+
 class AdminController extends Controller {
     public function index() 
     {
