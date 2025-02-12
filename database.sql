@@ -34,3 +34,16 @@ CREATE INDEX idx_announcements_company_id ON announcements(company_id);
 ALTER TABLE announcements ADD COLUMN deleted_at TIMESTAMP NULL;
 
 CREATE INDEX idx_announcements_deleted_at ON announcements(deleted_at);
+
+
+INSERT INTO companies (company_name, details) VALUES
+('OCP Group', 'A leading Moroccan phosphate mining and fertilizer production company.'),
+('Attijariwafa Bank', 'One of the largest banking groups in Morocco and Africa.'),
+('Maroc Telecom', 'The largest telecommunications company in Morocco.'),
+('ONEE', 'National Office for Electricity and Drinking Water, managing utilities in Morocco.'),
+('Royal Air Maroc', 'The national airline of Morocco, offering domestic and international flights.'),
+('Yazaki Morocco', 'A major automotive components manufacturer operating in Morocco.'),
+('Cosumar', 'A leading Moroccan company specializing in sugar production and refining.'),
+('Managem', 'A Moroccan mining group focused on extracting and processing precious metals.'),
+('Saham Assurance', 'A prominent insurance company offering a wide range of services in Morocco.'),
+('Marjane Holding', 'A large retail and distribution group operating supermarkets and hypermarkets in Morocco.');
