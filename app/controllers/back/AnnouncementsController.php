@@ -96,7 +96,8 @@ class AnnouncementsController extends Controller {
    
     public function restore() {
         $id = Validator::sanitize($_GET['id']);
-        return Announncements::withTrashed()->find($id)->restore();
+        Announncements::withTrashed()->find($id)->restore();
+        $this->redirect('/Admin/Announcements?success=Announcement restored successfully');
     }
 
     public function totalRecords() {

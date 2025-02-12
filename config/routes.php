@@ -20,3 +20,4 @@ $router->add('GET', '/announce/edit', 'Back\AnnouncementsController@showEditForm
 $router->add('POST', '/announce/edit', 'Back\AnnouncementsController@updateAnnounce');
 $router->add('GET', '/announce/delete', 'Back\AnnouncementsController@deleteAnnounce');
 $router->add('GET', '/announce/delete/hard', 'Back\AnnouncementsController@hardDeleteAnnounce');
+$router->add('GET', '/announce/restore', 'Back\AnnouncementsController@restore');
