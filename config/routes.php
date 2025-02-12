@@ -14,8 +14,7 @@ $router->add('GET', '/modifyCompany', 'Back\companyController@showModify');
 $router->add('POST', '/modifyCompany/update', 'Back\companyController@modifyCompany');
 $router->add('POST', '/Admin/Companies', 'Back\CompanyController@store');
 $router->add('GET', '/Home', 'Front\UserController@index');
-
-
-// the announcments routes
-$router->add('GET', '/announcments', 'Back\AnnouncementsController@index');
-$router->add('GET', '/announcments/create', 'Back\AnnouncementsController@create');
+$router->add('POST', '/announce/create', 'Back\AnnouncementsController@create');
+$router->add('GET', '/announce/edit', 'Back\AnnouncementsController@showEditForm');
+$router->add('POST', '/announce/edit', 'Back\AnnouncementsController@updateAnnounce');
+$router->add('GET', '/announce/delete', 'Back\AnnouncementsController@deleteAnnounce');
