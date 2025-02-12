@@ -22,7 +22,8 @@ try {
     Session::start();
 
     $loader = new FilesystemLoader(__DIR__ . '/../app/views');
-    $twig = new Environment($loader);
+    $twig = new Environment($loader, ['debug' => true]);
+    $twig->addExtension(new \Twig\Extension\DebugExtension());
 
     View::setTwig($twig);
 

@@ -31,4 +31,9 @@ class CompanyController extends Controller
 
         return view::render('/AdminDashboard');
     }
+    public function getAll(){
+        
+        $companies = Company::all();
+        return $companies;
+    }
 }
