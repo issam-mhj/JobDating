@@ -10,7 +10,7 @@ class Announncements extends Model {
 
     use SoftDeletes;
     protected $table = 'announcements';
-    protected $fillable = ['title', 'description', 'location', 'job_requirments', 'company_id'];
+    protected $fillable = ['post_title', 'description', 'location', 'job_requirments','job_date', 'company_id'];
 
     
     public function company(){
