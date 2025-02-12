@@ -13,12 +13,12 @@ class UserController extends Controller
 {
     public function index()
     {
+        $usersNumber = count(User::get());
+        
         try {
             if (Session::isset('user_id') && $_SESSION['role'] == 'user') {
-
-                $user = User::find(Session::get('user_id'));
                 $companies = Company::all();
-                View::render('UserDashboard', ['user' => $user, 'companies' => $companies]);
+                View::render('UserDashboard', ['usersNumber' => $usersNumber, 'companies' => $companies]);
             } else {
                 $this->redirect('/login');
             }
