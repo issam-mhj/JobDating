@@ -3,6 +3,7 @@ namespace App\Controllers\Back;
 use App\Core\Controller;
 use App\Core\View;
 use App\Models\Announncements;
+use App\Core\Validator;
 
 class AnnouncementsController extends Controller {
 
@@ -18,47 +19,71 @@ class AnnouncementsController extends Controller {
  
     public function create() {
 
-        Announncements::create([
-            'title' => 'New Announcement 2',
-            'description' => 'This is a new announcement 2',
-            'location' => 'Cairo - Egypt',
-            'job_requirments' => 'PHP, Laravel, MySQL, HTML, CSS, JS',
-            'company_id' => 5,
-        ]);
-        echo 'Announcement created successfully';
-
-    }
-
-    public function findById($id) {
+        if ($this->isPost()){
+         
+            $data = Validator::sanitize($_POST); 
         
-        $announcement = Announncements::find($id);
+            Announncements::create([
+                'post_title' => $data['title'],
+                'description' => $data['description'],
+                'location' => $data['location'],
+                'job_requirments' => $data['job_requirments'],
+                'job_date' => $data['date'],
+                'company_id' => $data['company_id']
+            ]);
+
+            $this->redirect('/Admin/Announcements?success=Announcement created successfully');
         
-
+        }
+        
     }
 
-    public function update($id) {
+
+    public function showEditForm() {
+
+        $id = $_GET['id'];
         $announcement = Announncements::find($id);
-        $announcement->title = 'Updated Announcement';
-        $announcement->description = 'This is an updated announcement';
-        $announcement->location = 'Giza - Egypt - Remote';
-        $announcement->job_requirments = 'PHP, Laravel, MySQL, HTML, CSS, JS, React';
-        $announcement->company_id = 5;
-        $announcement->save();
-        echo 'Announcement updated successfully';
+        $companies = (new CompanyController())->getAll();
+        return view::render('edit_announce', ['announcement' => $announcement, 'companies' => $companies]);
     }
 
-    public function delete($id) {
-        $announcement = Announncements::find($id)->delete();
-        echo 'Announcement deleted successfully';
+    public function updateAnnounce(){
+
+        if ($this->isPost()){
+            
+            $data = Validator::sanitize($_POST); 
+            $id = $data['id'];
+
+            $announcement = Announncements::find($id);
+            $announcement->post_title = $data['title'];
+            $announcement->description = $data['description'];
+            $announcement->location = $data['location'];
+            $announcement->job_requirments = $data['job_requirments'];
+            $announcement->job_date = $data['date'];
+            $announcement->company_id = $data['company_id'];
+            $announcement->save();
+            
+            $this->redirect('/Admin/Announcements?success=Announcement updated successfully');
+        }
+
     }
 
-    public function restore($id) {
-        $announcement = Announncements::withTrashed()->find($id)->restore();
-        echo 'Announcement restored successfully';
+    public function deleteAnnounce(){
+  
+        $id = Validator::sanitize($_GET['id']); 
+        Announncements::find($id)->delete();
+        $this->redirect('/Admin/Announcements?success=Announcement deleted successfully');
+
+    }
+
+   
+    public function restore() {
+        $id = Validator::sanitize($_GET['id']);
+        return Announncements::withTrashed()->find($id)->restore();
     }
 
     public function totalRecords() {
-        $total = Announncements::all()->count();
-        echo 'Total Announcements: ' . $total;
+        return Announncements::all()->count();
+      
     }
 }
