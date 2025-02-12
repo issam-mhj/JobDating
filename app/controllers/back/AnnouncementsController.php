@@ -11,8 +11,9 @@ class AnnouncementsController extends Controller {
    
     public function index() {
         
-
-        $announncements = Announncements::with('company')->get();
+        $announncements = Announncements::with('company')->get()->toArray();
+        
+        
         $companies = (new CompanyController())->getAll();
 
         return view::render('announcements', ['announncements' => $announncements, 'companies' => $companies]);
@@ -22,7 +23,7 @@ class AnnouncementsController extends Controller {
     public function create() {
 
         if ($this->isPost()){
-            // dd($_POST);
+      
          
             $data = Validator::sanitize($_POST); 
         
