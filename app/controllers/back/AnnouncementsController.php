@@ -7,15 +7,16 @@ use App\Core\Validator;
 use companies;
 
 class AnnouncementsController extends Controller {
-
-   
+    
+    
     public function index() {
         
+        $currentUrl = $_SERVER['REQUEST_URI'];
 
         $announncements = Announncements::with('company')->get();
         $companies = (new CompanyController())->getAll();
 
-        return view::render('announcements', ['announncements' => $announncements, 'companies' => $companies]);
+        return view::render('announcements', ['announncements' => $announncements, 'companies' => $companies, 'currentUrl' => $currentUrl]);
     }
 
  
