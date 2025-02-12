@@ -13,7 +13,6 @@ use App\Models\User;
 
 class CompanyController extends Controller
 {
-
     public function create()
     {
         return view::render('add_entreprise');
@@ -43,8 +42,9 @@ class CompanyController extends Controller
         try {
             if (Session::isset('user_id') && $_SESSION['role'] === 'admin') {
                 // $user = User::find(Session::get('user_id'));
+                $currentUrl = $_SERVER['REQUEST_URI'];
                 $companies = $this->getAll();
-                View::render('companies', ["companies" => $companies]);
+                View::render('companies', ["companies" => $companies, "currentUrl" => $currentUrl]);
             } else {
                 $this->redirect('/login');
             }
