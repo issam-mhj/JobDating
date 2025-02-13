@@ -5,7 +5,6 @@ use App\Core\View;
 use App\Models\Announncements;
 use App\Core\Validator;
 use App\Core\Session;
-use companies;
 
 class AnnouncementsController extends Controller {
     
@@ -111,7 +110,7 @@ class AnnouncementsController extends Controller {
         $this->redirect('/Admin/Announcements/deleted?message=Announcement_restored_successfully');
     }
 
-    public function totalRecords() {
+    public static function totalRecords() {
         return Announncements::all()->count();
       
     }

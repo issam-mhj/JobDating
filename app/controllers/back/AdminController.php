@@ -7,6 +7,8 @@ use App\Core\Session;
 use App\Core\View;
 use App\Core\Logger;
 use App\Models\User;
+use App\Controllers\Back\AnnouncementsController;
+use App\Controllers\Back\CompanyController;
 
 
 class AdminController extends Controller
@@ -17,7 +19,10 @@ class AdminController extends Controller
             if (Session::isset('user_id') && $_SESSION['role'] === 'admin') {
                 $user = User::find(Session::get('user_id'));
                 $currentUrl = $_SERVER['REQUEST_URI'];
-                View::render('AdminDashboard', ['user' => $user, 'currentUrl' => $currentUrl]);
+
+                $totalAnnounces = AnnouncementsController::totalRecords();
+                $totalCompanies = CompanyController::totalRecords();
+                View::render('AdminDashboard', ['user' => $user, 'currentUrl' => $currentUrl, 'totalAnnounces' => $totalAnnounces, 'totalCompanies' => $totalCompanies]);
             } else {
                 $this->redirect('/login');
             }
@@ -47,7 +52,7 @@ class AdminController extends Controller
     // {
     //     try {
     //         if (Session::isset('user_id') && $_SESSION['role'] === 'admin') {
-                
+
     //     $current_uri = $_SERVER['REQUEST_URI'];
     //             // $user = User::find(Session::get('user_id'));
     //             View::render('companies', ['current_uri' => $current_uri]);
