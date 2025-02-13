@@ -42,13 +42,17 @@ class AnnouncementsController extends Controller {
 
         if ($this->isPost()){
       
-         
+        
             $data = Validator::sanitize($_POST); 
+            $cover = $this->uploadCover($_FILES['cover']);
+
+            
         
             Announncements::create([
                 'post_title' => $data['title'],
                 'description' => $data['description'],
                 'location' => $data['location'],
+                'cover' => $cover,
                 'job_requirments' => $data['job_requirments'],
                 'job_date' => $data['date'],
                 'company_id' => $data['company_id']
@@ -62,6 +66,39 @@ class AnnouncementsController extends Controller {
         
     }
 
+   
+    public function uploadCover($file) {
+        $file_name = $file['name'];
+        $file_tmp_name = $file['tmp_name'];
+        $file_error = $file['error'];
+
+        if ($file_error === 0) {
+            $file_extension = pathinfo($file_name, PATHINFO_EXTENSION);
+            $file_extension_lowercase = strtolower($file_extension);
+            $allowed_extensions = ['jpg', 'jpeg', 'png'];
+
+            if (in_array($file_extension_lowercase, $allowed_extensions)) {
+                $stored_file_name = time(). '_' . $file_name;
+                $upload_directory = __DIR__.'/../../../public/assets/uploads/';
+
+                // Ensure directory exists
+                if (!file_exists($upload_directory)) {
+                    mkdir($upload_directory, 0777, true);
+                }
+
+                $image_upload_path = $upload_directory . $stored_file_name;
+
+                if (move_uploaded_file($file_tmp_name, $image_upload_path)) {
+                    return $stored_file_name;
+                }
+            }
+        }
+        return false; 
+    }
+     
+
+
+
 
     public function showEditForm() {
 
@@ -74,14 +111,22 @@ class AnnouncementsController extends Controller {
     public function updateAnnounce(){
 
         if ($this->isPost()){
+        
             
             $data = Validator::sanitize($_POST); 
             $id = $data['id'];
+
+            if ($_FILES['cover']['name'] === "") {
+                $data['cover'] = $this->getCover($id);
+            } else {
+                $data['cover'] = $this->uploadCover($_FILES['cover']);
+            }
 
             $announcement = Announncements::find($id);
             $announcement->post_title = $data['title'];
             $announcement->description = $data['description'];
             $announcement->location = $data['location'];
+            $announcement->cover = $data['cover'];
             $announcement->job_requirments = $data['job_requirments'];
             $announcement->job_date = $data['date'];
             $announcement->company_id = $data['company_id'];
@@ -114,5 +159,11 @@ class AnnouncementsController extends Controller {
     public function totalRecords() {
         return Announncements::all()->count();
       
+    }
+
+
+    public function getCover($id){
+        $announcement = Announncements::find($id);
+        return $announcement->cover;
     }
 }

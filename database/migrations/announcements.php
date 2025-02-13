@@ -9,6 +9,7 @@ class announcements {
             $table->string('post_title'); 
             $table->text('description'); 
             $table->string('location'); 
+            $table->string('cover'); 
             $table->string('job_requirments');
             $table->date('job_date');
             $table->unsignedBigInteger('company_id');
