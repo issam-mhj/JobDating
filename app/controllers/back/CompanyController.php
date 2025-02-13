@@ -3,13 +3,12 @@
 namespace App\Controllers\Back;
 
 use App\Models\Company;
-use Illuminate\Http\Request;
+use App\Models\Announncements;
 use App\Core\Controller;
 use App\Core\View;
 use Carbon\Carbon;
 use App\Core\Session;
 use App\Core\Logger;
-use App\Models\User;
 
 class CompanyController extends Controller
 {
@@ -17,7 +16,7 @@ class CompanyController extends Controller
     {
         return view::render('add_entreprise');
     }
-    
+
     public function store()
     {
         $name = $_POST["name"];
@@ -33,15 +32,13 @@ class CompanyController extends Controller
     }
     public function getAll()
     {
-
-        $companies = Company::all();
+        $companies = Company::withCount('announcements')->get();
         return $companies;
     }
     public function companies()
     {
         try {
             if (Session::isset('user_id') && $_SESSION['role'] === 'admin') {
-                // $user = User::find(Session::get('user_id'));
                 $currentUrl = $_SERVER['REQUEST_URI'];
                 $companies = $this->getAll();
                 View::render('companies', ["companies" => $companies, "currentUrl" => $currentUrl]);
@@ -73,5 +70,9 @@ class CompanyController extends Controller
         $details = $_POST["details"];
         Company::where('id', $id)->update(['company_name' => $name, 'details' => $details]);
         $this->redirect('/Admin/Companies');
+    }
+    public static function totalRecords()
+    {
+        return Company::all()->count();
     }
 }
