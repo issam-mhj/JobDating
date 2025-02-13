@@ -4,26 +4,43 @@ use App\Core\Controller;
 use App\Core\View;
 use App\Models\Announncements;
 use App\Core\Validator;
-use companies;
+use App\Core\Session;
 
 class AnnouncementsController extends Controller {
     
     
     public function index() {
+
+        Session::delete('message');
         
         $currentUrl = $_SERVER['REQUEST_URI'];
-
         $announncements = Announncements::with('company')->get();
         $companies = (new CompanyController())->getAll();
+        return view::render('announcements', ['announncements' => $announncements, 'companies' => $companies, 'currentUrl' => $currentUrl, 'message' => '$this->message']);
 
-        return view::render('announcements', ['announncements' => $announncements, 'companies' => $companies, 'currentUrl' => $currentUrl]);
+    }
+
+    public function deletedAnnounces() {
+        Session::delete('message');
+        $currentUrl = $_SERVER['REQUEST_URI'];
+        $announncements = Announncements::onlyTrashed()->get();
+        $companies = (new CompanyController())->getAll();
+        return view::render('delete_announcements', ['announncements' => $announncements, 'companies' => $companies, 'currentUrl' => $currentUrl]);
+    }
+
+    public function hardDeleteAnnounce() {
+        $id = Validator::sanitize($_GET['id']);
+        Announncements::withTrashed()->find($id)->forceDelete();
+        Session::set('message', 'Announcement deleted permanently');
+        $this->redirect('/Admin/Announcements/deleted?success=Announcement deleted permanently');
+    
     }
 
  
     public function create() {
 
         if ($this->isPost()){
-            // dd($_POST);
+      
          
             $data = Validator::sanitize($_POST); 
         
@@ -36,8 +53,10 @@ class AnnouncementsController extends Controller {
                 'company_id' => $data['company_id']
             ]);
 
-            $this->redirect('/Admin/Announcements?success=Announcement created successfully');
-        
+            Session::set('message', 'Announcement created successfully');
+
+            $this->redirect('/Admin/Announcements?message=Announcement created successfully');
+           
         }
         
     }
@@ -66,8 +85,10 @@ class AnnouncementsController extends Controller {
             $announcement->job_date = $data['date'];
             $announcement->company_id = $data['company_id'];
             $announcement->save();
+
+            Session::set('message', 'Announcement updated successfully');
             
-            $this->redirect('/Admin/Announcements?success=Announcement updated successfully');
+            $this->redirect('/Admin/Announcements?message=Announcement_updated_successfully');
         }
 
     }
@@ -76,17 +97,20 @@ class AnnouncementsController extends Controller {
   
         $id = Validator::sanitize($_GET['id']); 
         Announncements::find($id)->delete();
-        $this->redirect('/Admin/Announcements?success=Announcement deleted successfully');
+        Session::set('message', 'Announcement deleted successfully');
+        $this->redirect('/Admin/Announcements?message=Announcement_deleted_successfully');
 
     }
 
    
     public function restore() {
         $id = Validator::sanitize($_GET['id']);
-        return Announncements::withTrashed()->find($id)->restore();
+        Announncements::withTrashed()->find($id)->restore();
+        Session::set('message', 'Announcement restored successfully');
+        $this->redirect('/Admin/Announcements/deleted?message=Announcement_restored_successfully');
     }
 
-    public function totalRecords() {
+    public static function totalRecords() {
         return Announncements::all()->count();
       
     }
