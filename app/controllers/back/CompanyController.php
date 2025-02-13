@@ -17,18 +17,32 @@ class CompanyController extends Controller
     {
         return view::render('add_entreprise');
     }
-    
+
     public function store()
     {
         $name = $_POST["name"];
         $details = $_POST["details"];
+        $email = $_POST["email"];
+        $tel = $_POST["tel"];
+        $location = $_POST["location"];
+        if (isset($_FILES["logo"]) && $_FILES["logo"]["error"] === UPLOAD_ERR_OK) {
+            $logoName = $_FILES["logo"]["name"];
+            $logoTmpPath = $_FILES["logo"]["tmp_name"];
+            $logoPath = 'assets/uploads/' . $logoName;
+            move_uploaded_file($logoTmpPath, $logoPath);
+        } else {
+            $logoPath = null;
+        }
         Company::create([
             'company_name' => $name,
+            'email' => $email,
+            'number' => $tel,
+            'location' => $location,
+            'logo' => $logoPath,
             'details' => $details,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
-
         return view::render('/AdminDashboard');
     }
     public function getAll()
@@ -73,5 +87,9 @@ class CompanyController extends Controller
         $details = $_POST["details"];
         Company::where('id', $id)->update(['company_name' => $name, 'details' => $details]);
         $this->redirect('/Admin/Companies');
+    }
+    static function totalRecords()
+    {
+        return Company::all()->count();
     }
 }
