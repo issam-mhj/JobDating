@@ -47,16 +47,16 @@
 							<tr class="border-b">
 								<td class="p-4">
 									<div class="flex items-center">
-										<img src="/api/placeholder/40/40" alt="TechCorp" class="h-10 w-10 rounded-lg mr-3">
+										<img src="/{{ company.logo }}" alt="TechCorp" class="h-10 w-10 rounded-lg mr-3">
 										<div>
 											<div class="font-semibold">{{company.company_name}}</div>
-											<div class="text-sm text-gray-500">Youssoufia, Maroc</div>
+											<div class="text-sm text-gray-500">{{ company.location }}</div>
 										</div>
 									</div>
 								</td>
 								<td class="p-4">
-									<div>contact@techcorp.com</div>
-									<div class="text-sm text-gray-500">+212 5XX-XXXXXX</div>
+									<div>{{ company.email }}</div>
+									<div class="text-sm text-gray-500">{{ company.number }}</div>
 								</td>
 								<td class="p-4">{{ company.announcements_count|default(0) }}</td>
 								<td class="p-4">
@@ -73,7 +73,8 @@
 									</a>
 								</td>
 							</tr>
-							{%endfor%}</tbody>
+							{% endfor %}
+							</tbody>
 					</tbody>
 				</table>
 			</div>
