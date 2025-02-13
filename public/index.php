@@ -23,6 +23,7 @@ try {
 
     $loader = new FilesystemLoader(__DIR__ . '/../app/views');
     $twig = new Environment($loader, ['debug' => true]);
+    $twig->addGlobal('session', $_SESSION);
     $twig->addExtension(new \Twig\Extension\DebugExtension());
 
     View::setTwig($twig);

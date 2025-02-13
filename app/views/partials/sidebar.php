@@ -33,6 +33,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="/Admin/Announcements/deleted" class="flex items-center p-3 {{ currentUrl == '/Admin/Announcements/deleted' ? 'bg-blue-600' : 'hover:bg-gray-700' }} rounded-lg">
+                            <i class="fas fa-bullhorn w-6"></i>
+                            <span>Annonces supprimer</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="/Admin/Companies" class="flex items-center p-3 {{ currentUrl == '/Admin/Companies' ? 'bg-blue-600' : 'hover:bg-gray-700' }} rounded-lg">
                             <i class="fas fa-building w-6"></i>
                             <span>Entreprises</span>
