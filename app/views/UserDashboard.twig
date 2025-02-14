@@ -44,10 +44,6 @@
 				</div>
 			</div>
 		</div>
-		{% for announncement in announncements %}
-			<p>{{ company.company_name }}</p>
-			{# <p>{{ announncement.post_title }}</p> #}
-		{% endfor %}
 
 		<!-- Main Content -->
 		<main
@@ -79,40 +75,57 @@
 			</div>
 
 			<!-- Announcements Grid -->
-			<div
-				class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-				<!-- Announcement Card 1 -->
-				{% for announce in announces %}
-					<div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-						<div class="p-6">
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+				{% for announcement in announncements %}
+					<div
+						class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+						<!-- Image Section -->
+						<div class="relative h-48 w-full">
+							{% if announcement.cover %}
+								<img src="/assets/uploads/{{ announcement.cover }}" alt="{{ announcement.post_title }}" class="w-full h-full object-cover">
+							{% else %}
+								<div class="w-full h-full bg-gray-200 flex items-center justify-center">
+									<span class="text-gray-400">No image available</span>
+								</div>
+							{% endif %}
+						</div>
+
+						<div
+							class="p-6">
+							<!-- Company Info and Badge -->
 							<div class="flex items-center justify-between mb-4">
 								<div class="flex items-center">
 									<div class="bg-blue-600 h-12 w-12 rounded-lg flex items-center justify-center text-white text-xl">
-										{{ companyShortName }}
+										{{ announcement.company.company_name|slice(0, 2) }}
 									</div>
 									<div class="ml-3">
-										<h3 class="font-semibold text-gray-800">{{ companyName }}</h3>
-										<p class="text-sm text-gray-500">{{ JobNeeds }}</p>
+										<h3 class="font-semibold text-gray-800">{{ announcement.company.company_name }}</h3>
 									</div>
 								</div>
-								<span class="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">Nouveau</span>
 							</div>
+
+							<!-- Post Title -->
+							<h2 class="text-lg font-bold text-gray-900 mb-3">
+								{{ announcement.post_title }}
+							</h2>
+
+							<!-- Location and Date -->
 							<div class="space-y-3 mb-4">
 								<div class="flex items-center text-gray-600">
 									<i class="fas fa-map-marker-alt w-5"></i>
-									<span class="ml-2 text-sm">{{ location }}</span>
+									<span class="ml-2 text-sm">{{ announcement.location }}</span>
 								</div>
 								<div class="flex items-center text-gray-600">
 									<i class="fas fa-calendar w-5"></i>
 									<span class="ml-2 text-sm">Job Dating:
-										{{ Date }}
-									</span>
+										{{ announcement.job_date }}</span>
 								</div>
 							</div>
-							<p class="text-gray-600 text-sm mb-4">
-								{{ description }}
-							</p>
 
+							<!-- Description -->
+							<p class="text-gray-600 text-sm mb-4">
+								{{ announcement.description }}
+							</p>
 						</div>
 					</div>
 				{% endfor %}

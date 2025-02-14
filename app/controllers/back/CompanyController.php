@@ -3,7 +3,6 @@
 namespace App\Controllers\Back;
 
 use App\Models\Company;
-use App\Models\Announncements;
 use App\Core\Controller;
 use App\Core\View;
 use Carbon\Carbon;
@@ -42,7 +41,7 @@ class CompanyController extends Controller
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
-        return view::render('/AdminDashboard');
+        $this->redirect('/Admin/Companies');
     }
     public function getAll()
     {
