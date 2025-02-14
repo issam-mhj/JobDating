@@ -7,7 +7,7 @@ class companies
     public function up()
     {
         Capsule::schema()->create('companies', function ($table) {
-            $table->increments('id');
+            $table->id('id');
             $table->string('company_name', 100);
             $table->string('email', 100);
             $table->string('number', 100);
