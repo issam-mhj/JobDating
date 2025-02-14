@@ -3,13 +3,12 @@
 namespace App\Controllers\Back;
 
 use App\Models\Company;
-use Illuminate\Http\Request;
+use App\Models\Announncements;
 use App\Core\Controller;
 use App\Core\View;
 use Carbon\Carbon;
 use App\Core\Session;
 use App\Core\Logger;
-use App\Models\User;
 
 class CompanyController extends Controller
 {
@@ -17,31 +16,43 @@ class CompanyController extends Controller
     {
         return view::render('add_entreprise');
     }
-    
+
     public function store()
     {
         $name = $_POST["name"];
         $details = $_POST["details"];
+        $email = $_POST["email"];
+        $tel = $_POST["tel"];
+        $location = $_POST["location"];
+        if (isset($_FILES["logo"]) && $_FILES["logo"]["error"] === UPLOAD_ERR_OK) {
+            $logoName = $_FILES["logo"]["name"];
+            $logoTmpPath = $_FILES["logo"]["tmp_name"];
+            $logoPath = 'assets/uploads/' . $logoName;
+            move_uploaded_file($logoTmpPath, $logoPath);
+        } else {
+            $logoPath = null;
+        }
         Company::create([
             'company_name' => $name,
+            'email' => $email,
+            'number' => $tel,
+            'location' => $location,
+            'logo' => $logoPath,
             'details' => $details,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
-
         return view::render('/AdminDashboard');
     }
     public function getAll()
     {
-
-        $companies = Company::all();
+        $companies = Company::withCount('announcements')->get();
         return $companies;
     }
     public function companies()
     {
         try {
             if (Session::isset('user_id') && $_SESSION['role'] === 'admin') {
-                // $user = User::find(Session::get('user_id'));
                 $currentUrl = $_SERVER['REQUEST_URI'];
                 $companies = $this->getAll();
                 View::render('companies', ["companies" => $companies, "currentUrl" => $currentUrl]);
@@ -71,7 +82,24 @@ class CompanyController extends Controller
         $id = $_POST["company_id"];
         $name = $_POST["company_name"];
         $details = $_POST["details"];
-        Company::where('id', $id)->update(['company_name' => $name, 'details' => $details]);
+        $location = $_POST["location"];
+        $number = $_POST["number"];
+        $email = $_POST["email"];
+        if (isset($_FILES["logo"]) && $_FILES["logo"]["error"] <= 1) {
+            $logoName = $_FILES["logo"]["name"];
+            $logoTmpPath = $_FILES["logo"]["tmp_name"];
+            $logoPath = 'assets/uploads/' . $logoName;
+            move_uploaded_file($logoTmpPath, $logoPath);
+        } else {
+            $logoPath = Company::find($id)->logo;
+        }
+        Company::where('id', $id)->update(['company_name' => $name, 'email' => $email, 'number' => $number, 'location' => $location, 'logo' => $logoPath, 'details' => $details]);
         $this->redirect('/Admin/Companies');
+    }
+
+    public static function totalRecords()
+
+    {
+        return Company::all()->count();
     }
 }
