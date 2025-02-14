@@ -82,7 +82,18 @@ class CompanyController extends Controller
         $id = $_POST["company_id"];
         $name = $_POST["company_name"];
         $details = $_POST["details"];
-        Company::where('id', $id)->update(['company_name' => $name, 'details' => $details]);
+        $location = $_POST["location"];
+        $number = $_POST["number"];
+        $email = $_POST["email"];
+        if (isset($_FILES["logo"]) && $_FILES["logo"]["error"] <= 1) {
+            $logoName = $_FILES["logo"]["name"];
+            $logoTmpPath = $_FILES["logo"]["tmp_name"];
+            $logoPath = 'assets/uploads/' . $logoName;
+            move_uploaded_file($logoTmpPath, $logoPath);
+        } else {
+            $logoPath = Company::find($id)->logo;
+        }
+        Company::where('id', $id)->update(['company_name' => $name, 'email' => $email, 'number' => $number, 'location' => $location, 'logo' => $logoPath, 'details' => $details]);
         $this->redirect('/Admin/Companies');
     }
 
