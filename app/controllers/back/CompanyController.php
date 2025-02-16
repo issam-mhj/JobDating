@@ -102,4 +102,9 @@ class CompanyController extends Controller
     {
         return Company::all()->count();
     }
+
+    public static function getCompanyName($company_id)
+    {
+        return Company::find($company_id)->company_name;
+    }
 }

@@ -3,8 +3,10 @@ namespace App\Controllers\Back;
 use App\Core\Controller;
 use App\Core\View;
 use App\Models\Announncements;
+use App\Models\Company;
 use App\Core\Validator;
 use App\Core\Session;
+use App\Controllers\Back\CompanyController;
 
 class AnnouncementsController extends Controller {
     
@@ -43,27 +45,59 @@ class AnnouncementsController extends Controller {
       
         
             $data = Validator::sanitize($_POST); 
+            
             $cover = $this->uploadCover($_FILES['cover']);
+            $title = $data['title'];
+            $description = $data['description'];
+            $job_date = date('d F Y', strtotime($data['date']));
+            $location = $data['location'];
+            $company_id = $data['company_id'];
+            $job_requirments = $data['job_requirments'];
+
+            if (empty($title) || empty($description) || empty($job_date) || empty($location) || empty($company_id)) {
+                echo json_encode(['success' => false, 'message' => 'All fields are required.']);
+                exit;
+            }
 
             
         
-            Announncements::create([
-                'post_title' => $data['title'],
-                'description' => $data['description'],
-                'location' => $data['location'],
-                'cover' => $cover,
-                'job_requirments' => $data['job_requirments'],
-                'job_date' => $data['date'],
-                'company_id' => $data['company_id']
+            $announceId = Announncements::create([
+                'post_title' => $title,
+                'description' => $description,
+                'job_date' => $job_date,
+                'location' => $location,
+                'job_requirments' => $job_requirments,
+                'company_id' => $company_id,
+                'cover' => $cover
+            ])->id;
+
+            $companyName = CompanyController::getCompanyName($company_id);
+
+            echo json_encode([
+                'success' => true,
+                'data' => [
+                    'id' => $announceId,
+                    'title' => $title,
+                    'description' => $description,
+                    'job_date' => $job_date,
+                    'location' => $location,
+                    'company_name' => $companyName
+                ]
             ]);
+            exit;
+           
+
 
             Session::set('message', 'Announcement created successfully');
 
-            $this->redirect('/Admin/Announcements?message=Announcement created successfully');
+            
            
         }
+        echo json_encode(['success' => false, 'message' => 'Invalid request']);
+        exit;
         
     }
+
 
    
     public function uploadCover($file) {
