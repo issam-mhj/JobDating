@@ -17,6 +17,7 @@ class Validator
         return $errors;
     }
 
+
     public static function sanitize($data) {
     
         if (is_array($data)) {
@@ -24,6 +25,8 @@ class Validator
         }
         return htmlspecialchars(trim($data), ENT_QUOTES, 'UTF-8');
     }
+
+   
 
     public static function isValidPassword($password, $field, $errors = [])
     {

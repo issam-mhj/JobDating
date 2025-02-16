@@ -1,14 +1,15 @@
 <?php
 namespace App\Controllers\Back;
 use App\Core\Controller;
+use App\Controllers\Back\CompanyController;
 use App\Core\View;
 use App\Models\Announncements;
 use App\Models\Company;
 use App\Core\Validator;
 use App\Core\Session;
-use App\Controllers\Back\CompanyController;
-
+use DateTime;
 class AnnouncementsController extends Controller {
+    
     
     
     public function index() {
@@ -98,7 +99,6 @@ class AnnouncementsController extends Controller {
         
     }
 
-
    
     public function uploadCover($file) {
         $file_name = $file['name'];
@@ -136,7 +136,8 @@ class AnnouncementsController extends Controller {
     public function showEditForm() {
 
         $id = $_GET['id'];
-        $announcement = Announncements::find($id);
+        $announcement = Announncements::with('company')->find($id);
+        // dd($announcement->company->company_name);
         $companies = (new CompanyController())->getAll();
         return view::render('edit_announce', ['announcement' => $announcement, 'companies' => $companies]);
     }

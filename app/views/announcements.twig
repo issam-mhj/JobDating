@@ -186,23 +186,23 @@
 
 <script>
 $(document).ready(function() {
-    
+    // Handle form submission
     $("#create-announce").submit(function(e) {
-        e.preventDefault();
+        e.preventDefault(); // Prevent default form submission
 
-        var formData = new FormData(document.querySelector("#create-announce")); 
+        var formData = new FormData(document.querySelector("#create-announce")); // For handling file uploads
         
 
         $.ajax({
-            url: '/announce/create',
+            url: '/announce/create', // Get action URL from form
             type: "POST",
             data: formData,
-            processData: false,  
-            contentType: false,  
+            processData: false,  // Important for FormData
+            contentType: false,  // Important for FormData
             dataType: "json",
             success: function(response) {   
                 if (response.success) {
-                    
+                    // Append the new announcement dynamically
                     $("#announce-list tbody").append(`
                         <tr class="border-b" id="announce-${response.data.id}">
                             <td class="p-4">
@@ -226,7 +226,7 @@ $(document).ready(function() {
                         </tr>
                     `);
 
-                    
+                    // Hide the modal and reset the form
                     $("#addAnnouncementModal").addClass("hidden");
                     $("#create-announce")[0].reset();
                 } else {
