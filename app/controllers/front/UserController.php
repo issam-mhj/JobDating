@@ -2,23 +2,27 @@
 
 namespace App\Controllers\Front;
 
+use App\Controllers\Back\AnnouncementsController;
 use App\Controllers\Back\CompanyController;
 use App\Core\Controller;
 use App\Core\Logger;
 use App\Core\Session;
 use App\Core\View;
 use App\Models\User;
+use App\Models\Announncements;
 
 class UserController extends Controller
 {
     public function index()
     {
         $usersNumber = count(User::get());
-        $companies = (new CompanyController())->getAll();
+        $announncements = Announncements::with('company')->get();
+        $totalCompanies = CompanyController::totalRecords();
+        $totalAnnounces = AnnouncementsController::totalRecords();
 
         try {
             if (Session::isset('user_id') && $_SESSION['role'] == 'user') {
-                View::render('UserDashboard', ['usersNumber' => $usersNumber, 'companies' => $companies]);
+                View::render('UserDashboard', ['usersNumber' => $usersNumber, 'announncements' => $announncements, 'totalCompanies' => $totalCompanies, 'totalAnnounces' => $totalAnnounces]);
             } else {
                 $this->redirect('/login');
             }
